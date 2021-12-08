@@ -19,7 +19,8 @@ Requisitos:
 Verifique antes a versão instalada do Google Chrome para baixar o chromedriver correto!
 
  - Salve o arquivo baixado chromedriver.exe em uma pasta de sua escolha
- - O valor da variável PATH no código deverá ser o caminho para essa pasta
+ - O valor da variável PATH no código deverá ser o caminho completo para esse arquivo
+ - EXEMPLO: PATH = "C:\Users\Alex\Desktop\chromedriver\chromedriver.exe"
 
 BANCO DE DADOS
  - O banco MySQL deverá possuir um banco chamado AVON contendo as tabelas:
