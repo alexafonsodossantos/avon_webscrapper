@@ -4,11 +4,11 @@ AVON WEBSCRAPPER 1.0
 
 Requisitos:
  - Beautyful Soup 4
-	pip install bs4
+ 	- pip install bs4
  - Selenium
-	pip install selenium
+	- pip install selenium
  - Python mysql connector
-	pip install mysql-connector-python
+	- pip install mysql-connector-python
 
  - Chrome Webdriver
 	https://chromedriver.chromium.org/download
