@@ -15,6 +15,7 @@ Requisitos:
 
 
 ** IMPORTANTE **
+
 Verifique antes a versão instalada do Google Chrome para baixar o chromedriver correto!
 
  - Salve o arquivo baixado chromedriver.exe em uma pasta de sua escolha
