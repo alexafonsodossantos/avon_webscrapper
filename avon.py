@@ -130,5 +130,4 @@ for cep in CEPS:
         print(mycursor.rowcount, "record inserted.")
 
     driver.close()
-    print("Busca do CEP" + cep + "Finalizada.")
     time.sleep(10)
