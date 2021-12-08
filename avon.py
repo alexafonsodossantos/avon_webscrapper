@@ -1,19 +1,10 @@
 import mysql.connector
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import time
+from bs4 import BeautifulSoup
 
-
-
-mydb = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  password="",
-  #comente a linha abaixo caso vá realizar a criação do banco/tabelas por esse script. 
-  database = "AVON"
-)
-
-#'descomente' as linhas abaixo caso vá realizar a criação do banco/tabelas por esse script
-#mycursor.execute("CREATE TABLE revendedores (nome VARCHAR(255), bairro VARCHAR(255), distancia VARCHAR(255),email VARCHAR(255),telefone VARCHAR(255))")
-#mycursor.execute("CREATE TABLE cep (postalcode VARCHAR (255))")
-
+PATH = "C:\carros\chromedriver.exe"
 
 def times_search(t, driver):
     contador = 0
@@ -26,13 +17,17 @@ def times_search(t, driver):
         except:
             pass
 
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  password="",
+  #comente a linha abaixo caso vá realizar a criação do banco/tabelas por esse script. 
+  database = "AVON"
+)
 
-PATH = "C:\carros\chromedriver.exe"
-
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-import time
-from bs4 import BeautifulSoup
+#'descomente' as linhas abaixo caso vá realizar a criação do banco/tabelas por esse script
+#mycursor.execute("CREATE TABLE revendedores (nome VARCHAR(255), bairro VARCHAR(255), distancia VARCHAR(255),email VARCHAR(255),telefone VARCHAR(255))")
+#mycursor.execute("CREATE TABLE cep (postalcode VARCHAR (255))")
 
 CEPS = []
 
