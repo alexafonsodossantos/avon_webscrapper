@@ -1,3 +1,13 @@
+class revendedor:
+    nome = ""
+    telefone = ""
+    email = ""
+    distancia = ""
+    bairro = ""
+
+
+
+
 
 def times_search(t, driver):
     contador = 0
@@ -50,17 +60,57 @@ dados = []
 
 for artist_name in artist_name_list_items:
     names = artist_name.contents
-    print(names)
     dados.append(names)
 
-print(dados)
+revendedores = []
+
 
 for a in dados:
     for b in a:
         if str(b) == str("<strong>Compre por: </strong>"):
-            print("\n")
+            revendedores.append("0")
         else:
-            print(b)
+            revendedores.append(b)
+
+lista_limpa = []
+lista_menor = []
+
+
+i = 0
+while i < len(revendedores):
+    if  revendedores[i] == "0":
+        lista_limpa.append(lista_menor)
+        lista_menor = []
+        i = i + 1
+        
+    else:
+        lista_menor.append(revendedores[i])
+        i = i + 1
+
+
+for c in lista_limpa:
+    if len(c) < 5:
+        c.append("0")
+    else:
+        continue
+
+for x in lista_limpa:
+    if x[4] == "0":
+        e = x[3]
+        f = x[4]
+        x[3] = f
+        x[4] = e
+    else:
+        continue
+for nhe in lista_limpa:
+    print(nhe)
+
+
+
+
+    
+
+
 
 
 
