@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 from bs4 import BeautifulSoup
 
-PATH = "C:\carros\chromedriver.exe"
+PATH = "./driver/cd96.exe"
 
 def times_search(t, driver):
     contador = 0
@@ -22,7 +22,7 @@ mydb = mysql.connector.connect(
   user="root",
   password="",
   #comente a linha abaixo caso vá realizar a criação do banco/tabelas por esse script. 
-  database = "AVON"
+  database = "RepCom"
 )
 
 #'descomente' as linhas abaixo caso vá realizar a criação do banco/tabelas por esse script
