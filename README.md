@@ -11,7 +11,7 @@ Requisitos:
 	- pip install mysql-connector-python
 
  - Chrome Webdriver
-	- https://chromedriver.chromium.org/download
+	- https://chromedriver.chromium.org/downloads
 
 
 ** IMPORTANTE **
