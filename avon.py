@@ -68,7 +68,7 @@ for empresa in EMPRESAS:
 
         for i in range(4): #definir quantidade de vezes a ser clicado no botao de buscar começar pelo 0
             try:
-                buscaMais = driver.find_element(By.CLASS_NAME,'js--carregarMais')
+                buscaMais = driver.find_element(By.CLASS_NAME,empresa[7])
                 buscaMais.click()
                 time.sleep(10)
             except:
