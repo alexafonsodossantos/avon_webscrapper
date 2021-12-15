@@ -66,7 +66,7 @@ for empresa in EMPRESAS:
         #buscaBotao.click()
         time.sleep(10)
 
-        for i in range(4): #definir quantidade de vezes a ser clicado no botao de buscar começar pelo 0
+        for i in range(9): #definir quantidade de vezes a ser clicado no botao de buscar começar pelo 0
             try:
                 buscaMais = driver.find_element(By.CLASS_NAME,empresa[7])
                 buscaMais.click()
@@ -138,11 +138,11 @@ for empresa in EMPRESAS:
             msg = mycursor.fetchone()  
             # check if it is empty and print error
             if not msg:
-                sql = "INSERT INTO tb_revendedores (str_nome_revendedores, str_bairro, str_distancia, str_email, str_telefone, id_empresa) VALUES ( '"+nhe[0]+"', '"+nhe[1]+"', '"+nhe[2]+"', '"+nhe[3]+"', '"+nhe[4]+"', '"+str(empresa[0])+"')"
+                sql = "INSERT INTO tb_revendedores (str_nome_revendedores, str_bairro, str_distancia, str_email, str_telefone, id_empresa, id_cidade) VALUES ( '"+nhe[0]+"', '"+nhe[1]+"', '"+nhe[2]+"', '"+nhe[3]+"', '"+nhe[4]+"', '"+str(empresa[0])+"', '"+str(cep[2])+"')"
                 mycursor.execute(sql)
                 mydb.commit()
                 registros += 1 
 
-        print(registros, "registros inseridos.")
+        print(registros, "registros inseridos do CEP "+str(cep[1])+" na empresa "+str(empresa[1])+".")
         driver.close()
         time.sleep(2)
