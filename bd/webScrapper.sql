@@ -1038,6 +1038,7 @@ CREATE TABLE IF NOT EXISTS `tb_empresa` (
   `str_elem_sep` varchar(60) DEFAULT NULL,
   `str_elem_fecha` varchar(60) DEFAULT NULL,
   `str_elem_verMais` varchar(60) DEFAULT NULL,
+  `str_btn_busca` varchar(60) DEFAULT NULL,
   `b_ativo` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id_empresa`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
@@ -1045,18 +1046,18 @@ CREATE TABLE IF NOT EXISTS `tb_empresa` (
 -- Copiando dados para a tabela repcom.tb_empresa: ~9 rows (aproximadamente)
 DELETE FROM `tb_empresa`;
 /*!40000 ALTER TABLE `tb_empresa` DISABLE KEYS */;
-INSERT INTO `tb_empresa` (`id_empresa`, `str_nome_empresa`, `str_url`, `str_elem_busca`, `str_elem_result`, `str_elem_sep`, `str_elem_fecha`, `str_elem_verMais`, `b_ativo`) VALUES
-	(1, 'Avon', 'https://www.avon.com.br/encontre-representante-avon', 'x-cep', 'x-representante--formulario--result', 'p', '<strong>Compre por: </strong>', 'js--carregarMais', 1),
-	(2, 'Mary Kay', 'https://localizador.marykay.com.br/', 'zipcode', NULL, NULL, NULL, NULL, 0),
-	(3, 'Natura', 'https://', NULL, NULL, NULL, NULL, NULL, 0),
-	(4, 'Eudora', 'https://', NULL, NULL, NULL, NULL, NULL, 0),
-	(5, 'HerbaLife', 'https://', NULL, NULL, NULL, NULL, NULL, 0),
-	(6, 'Jequiti', 'https://', NULL, NULL, NULL, NULL, NULL, 0),
-	(7, 'Boticário', 'https://', NULL, NULL, NULL, NULL, NULL, 0),
-	(8, 'Rommanel', 'https://', NULL, NULL, NULL, NULL, NULL, 0),
-	(9, 'Tupperware', 'https://', NULL, NULL, NULL, NULL, NULL, 0),
-	(10, 'Jeunesse', 'https://', NULL, NULL, NULL, NULL, NULL, 0),
-	(11, 'DeMillus', 'https://', NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `tb_empresa` (`id_empresa`, `str_nome_empresa`, `str_url`, `str_elem_busca`, `str_elem_result`, `str_elem_sep`, `str_elem_fecha`, `str_elem_verMais`, `str_btn_busca`, `b_ativo`) VALUES
+	(1, 'Avon', 'https://www.avon.com.br/encontre-representante-avon', 'x-cep', 'x-representante--formulario--result', 'p', '<strong>Compre por: </strong>', 'js--carregarMais', NULL, 0),
+	(2, 'Mary Kay', 'https://localizador.marykay.com.br/', 'zipcode', 'consultantResult', 'div', 'BUSCAR OUTRA CONSULTORA', 'btn_FindAnother', 'btnLocate', 1),
+	(3, 'Natura', 'https://www.natura.com.br/buscar-consultor', 'Consultant_input-search__37MyG', NULL, NULL, NULL, NULL, NULL, 0),
+	(4, 'Eudora', 'https://', NULL, NULL, NULL, NULL, NULL, NULL, 0),
+	(5, 'HerbaLife', 'https://', NULL, NULL, NULL, NULL, NULL, NULL, 0),
+	(6, 'Jequiti', 'https://', NULL, NULL, NULL, NULL, NULL, NULL, 0),
+	(7, 'Boticário', 'https://', NULL, NULL, NULL, NULL, NULL, NULL, 0),
+	(8, 'Rommanel', 'https://', NULL, NULL, NULL, NULL, NULL, NULL, 0),
+	(9, 'Tupperware', 'https://', NULL, NULL, NULL, NULL, NULL, NULL, 0),
+	(10, 'Jeunesse', 'https://', NULL, NULL, NULL, NULL, NULL, NULL, 0),
+	(11, 'DeMillus', 'https://', NULL, NULL, NULL, NULL, NULL, NULL, 0);
 /*!40000 ALTER TABLE `tb_empresa` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela repcom.tb_revendedores
@@ -1069,50 +1070,18 @@ CREATE TABLE IF NOT EXISTS `tb_revendedores` (
   `str_email` varchar(100) NOT NULL,
   `str_telefone` varchar(100) NOT NULL,
   `id_empresa` int(11) NOT NULL,
+  `id_cidade` int(11) NOT NULL,
   PRIMARY KEY (`id_revendedores`),
   KEY `FK_revendedor_empresa` (`id_empresa`),
+  KEY `FK_revendedor_cidade` (`id_cidade`),
+  CONSTRAINT `FK_revendedor_cidade` FOREIGN KEY (`id_cidade`) REFERENCES `tb_cidade` (`id_cidade`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_revendedor_empresa` FOREIGN KEY (`id_empresa`) REFERENCES `tb_empresa` (`id_empresa`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela repcom.tb_revendedores: ~33 rows (aproximadamente)
+-- Copiando dados para a tabela repcom.tb_revendedores: ~532 rows (aproximadamente)
 DELETE FROM `tb_revendedores`;
 /*!40000 ALTER TABLE `tb_revendedores` DISABLE KEYS */;
-INSERT INTO `tb_revendedores` (`id_revendedores`, `str_nome_revendedores`, `str_bairro`, `str_distancia`, `str_email`, `str_telefone`, `id_empresa`) VALUES
-	(1, 'ODILIA INES M MONCAO', 'CECAP 3 - SP', '0.13km de distância', 'FLAVIORMONCAO@GMAIL.COM', '+55 019 99248-1285', 1),
-	(2, 'MARCIA APARECIDA MARCUSSI FERRAZ', 'NUC HABITACIONAL BRIGADEIRO FA - SP', '0.22km de distância', 'MAR_MARCILIA2003@YAHOO.COM.BR', '+55 019 99338-9734', 1),
-	(3, 'STEFANY EVANGELISTA', 'JD ADRIANA - SP', '0.25km de distância', 'Stefany.evangelista01@gmail.com', '+55 019 99369-3434', 1),
-	(4, 'SANDRA APARECIDA DE OLIVEIRA LIMA', 'NUCLEO HABIT BRG FARIA LIMA - SP', '0.25km de distância', 'drinha_25@hotmail.com', '+55 019 99135-9183', 1),
-	(5, 'MONICA DA SILVA', 'CENTRO - SP', '0.07km de distância', 'MONICASILVA75@HOTMAIL.COM', '+55 019 99169-8487', 1),
-	(6, 'ALEXANDRINA MARIA DIAS DE CARVALHO', 'CENTRO - SP', '0.16km de distância', 'XAN_CARVALHO@HOTMAIL.COM', '+55 019 99730-9521', 1),
-	(7, 'GIOVANA OLIVEIRA CARVALHO', 'CENTRO - SP', '0.17km de distância', 'GIOVANA.GILY@GMAIL.COM', '+55 011 93937-1092', 1),
-	(8, 'ROSEMEIRE CORREIA DE AGUIAR', 'CENTRO - SP', '0.19km de distância', 'ROSEAGUIARSOUZA@YAHOO.COM.BR', '+55 019 99193-4444', 1),
-	(9, 'VILMA DALARA FERRARI', 'CENTRO - SP', '0.01km de distância', '0', '+55 019 99185-8008', 1),
-	(10, 'NEUSA BARBOSA PEREIRA', 'CENTRO - SP', '0.11km de distância', 'CRISTIANEBARGA@GMAIL.COM', '+55 011 98400-6711', 1),
-	(11, 'MARIA DO SOCORRO FERREIRA BATALHA', 'CENTRO - SP', '0.12km de distância', 'MARIASFBATALHA@HOTMAIL.COM', '+55 019 99226-7184', 1),
-	(12, 'OXANA ALEXANDROVNA KUSHMAN SOBREIRA', 'CENTRO - SP', '0.19km de distância', 'SOFIBOX@MAIL.RU', '+55 000 00000-0000', 1),
-	(13, 'ALCIONE TIMOTEO DA SILVA LIMA', 'JARDIM COLONIAL - SP', '0.20km de distância', 'ALCIONETMO@HOTMAIL.COM', '+55 019 09179-9013', 1),
-	(14, 'MARIA AMELIA SCARPARO DE OLIVEIRA', 'LAURO BUENO DE CAMARGO - SP', '0.20km de distância', 'MASCARPARO@YAHOO.COM.BR', '+55 019 99131-2686', 1),
-	(15, 'NAMIE HAYASHI FRAGATA', 'CENTRO - SP', '0.23km de distância', 'lifragata@yahoo.com.br', '+55 019 99201-2076', 1),
-	(16, 'CARLOS EVANDRO FELIX SOARES', 'VILA MARIA HELENA - SP', '0.23km de distância', 'DALIDAREGINASOARES@GMAIL.COM', '+55 019 98419-0457', 1),
-	(17, 'JOSE APARECIDO MOREIRA', 'VILA MARIA - SP', '0.24km de distância', 'JOSEAPMILAN@HOTMAIL.COM', '+55 019 99386-9221', 1),
-	(18, 'GIRLENE DOS SANTOS', 'CIDADE NOVA II - SP', '0.26km de distância', 'GIRLENE@GMAIL.CON', '+55 019 98768-6022', 1),
-	(19, 'JULIENE GIBIM FERNANDES', 'CIDADE NOVA II - SP', '0.27km de distância', 'JUGIBIM@GMAIL.COM', '+55 019 99714-2684', 1),
-	(20, 'ROSANA COELHO TOME', 'VILA GEORGINA - SP', '0.09km de distância', 'NAAH_TOMESZ@HOTMAIL.COM', '+55 019 99555-5079', 1),
-	(21, 'ANA MARIA SOUZA', 'VL GEORGINA - SP', '0.15km de distância', 'ANAMSOUZA62@YAHOO.COM.BR', '+55 019 99130-2437', 1),
-	(22, 'ELIANE APARECIDA BENTO', 'CIDADE NOVA I - SP', '0.17km de distância', 'ELIANE_AB@TERRA.COM.BR', '+55 019 99109-1437', 1),
-	(23, 'JANETE TERESINHA DA MOTTA', 'VILA GEORGINA - SP', '0.17km de distância', 'JANETEMOTTA9@GMAIL.COM', '+55 019 98215-9555', 1),
-	(24, 'SONIA APARECIDA BARAO', 'CIDADE NOVA II - SP', '0.10km de distância', 'SONIABARAO@YAHOO.COM.BR', '+55 019 98106-6593', 1),
-	(25, 'DANIELE SILVA FERREIRA', 'CIDADE NOVA II - SP', '0.11km de distância', 'DANIELESILVAFERREIRA88@GMAIL.COM', '+55 019 99538-2645', 1),
-	(26, 'DANIELA APARECIDA POIANI DE LIMA', 'PRQ RESIDENCIAL SABIAS - SP', '0.13km de distância', 'DANYPOIANI@HOTMAIL.COM', '+55 019 98351-5760', 1),
-	(27, 'GIULIA ANGELOTTE GERALDI', 'CENTRO - SP', '0.08km de distância', 'GIU.ANGELOTTE@HOTMAIL.COM', '+55 019 99206-6526', 1),
-	(28, 'ROSEVILDA ANA DOS SANTOS', 'CENTRO - SP', '0.16km de distância', 'JOSENASCIMENTO@YMAIL.COM', '+55 019 99557-4339', 1),
-	(29, 'ELOISA FERNANDES DE OLIVEIRA', 'VILA AVAI - SP', '0.22km de distância', 'ELOISAFERNANDES@YAHOO.COM.BR', '+55 011 98515-5968', 1),
-	(30, 'CAMILA CAUS GROSSELLI', 'JARDIM SANTA RITA - SP', '0.32km de distância', 'CAMILACAUSS@HOTMAIL.COM', '+55 019 99938-4244', 1),
-	(31, 'RAYSSA MONISE ARTONI WIZINTENE', 'JARDIM SANTA RITA - SP', '0.35km de distância', 'RAYSSA_ARTONI@HOTMAIL.COM', '+55 019 97112-2195', 1),
-	(32, 'MARIZETE APARECIDA BARBOSA', 'JARDIM REGENTE - SP', '0.37km de distância', 'MARISETE.A.B@HOTMAIL.COM', '+55 019 99734-2748', 1),
-	(33, 'LETICIA FELIX DA SILVA', 'CIDADE NOVA I - SP', '0.15km de distância', 'LETICIAFELIXFS@HOTMAIL.COM', '+55 019 99108-2871', 1),
-	(34, 'JESSICA BIANCONI BAIJO', 'JD D BOSCO - SP', '0.37km de distância', 'JESSICABAIJO@YAHOO.COM.BR', '+55 011 98204-3001', 1),
-	(35, 'RICHARD BALDOW TEIXEIRA', 'CIDADE NOVA II - SP', '0.26km de distância', '0', '+55 019 99743-7074', 1);
+
 /*!40000 ALTER TABLE `tb_revendedores` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
