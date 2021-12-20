@@ -27,7 +27,6 @@ CEPS = []
 ser = Service(PATH)
 op = webdriver.ChromeOptions()
 op.add_experimental_option('excludeSwitches', ['enable-logging'])
-driver = webdriver.Chrome(service=ser, options=op)
 
 def limpaCampo(texto):
     limpaCaracteres = "\n|.,%$"
@@ -120,7 +119,7 @@ def montaLista(d,emp):
 
 mycursor = mydb.cursor()
 
-sql = "SELECT * FROM tb_cep WHERE id_cep > 76"
+sql = "SELECT * FROM tb_cep WHERE id_cep > 78"
 mycursor.execute(sql)
 
 myresultCEPS = mycursor.fetchall()
@@ -142,12 +141,13 @@ for empresa in EMPRESAS:
     for cep in CEPS:
 
         print("Abrindo a página...")
+        driver = webdriver.Chrome(service=ser, options=op)
         driver.get(urlBusca)
 
         time.sleep(5)
         lista_cadastro = []
 
-        if empresa[0] == 1:
+        if str(empresa[0]) == "1":
             buscaCep = itemBusca(driver, By.ID, empresa[3])
             buscaCep.send_keys(str(cep[1]))
             if empresa[8] is None:
@@ -164,7 +164,7 @@ for empresa in EMPRESAS:
                 except:
                     pass
             lista_cadastro = montaLista(driver,empresa)
-        elif empresa[0] == 2:
+        elif str(empresa[0]) == "2":
             buscaCep = itemBusca(driver, By.ID, empresa[3])
             buscaCep.send_keys(str(cep[1][:5] + "-" + cep[1][5:]))
             if empresa[8] is None:
@@ -185,7 +185,7 @@ for empresa in EMPRESAS:
                     time.sleep(3)
                 except:
                     pass
-        if empresa[0] == 3:
+        if atr(empresa[0]) == "3":
             buscaCep = itemBusca(driver, By.CLASS_NAME, empresa[3])
             buscaCep.send_keys(str(cep[1]))
             if empresa[8] is None:
