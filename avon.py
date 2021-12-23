@@ -119,7 +119,7 @@ def montaLista(d,emp):
 
 mycursor = mydb.cursor()
 
-sql = "SELECT * FROM tb_cep" #WHERE id_cep > 142"
+sql = "SELECT * FROM tb_cep WHERE id_cidade = 2"
 mycursor.execute(sql)
 
 myresultCEPS = mycursor.fetchall()
@@ -220,6 +220,9 @@ for empresa in EMPRESAS:
                 mydb.commit()
                 registros += 1 
 
+        sql = "UPDATE tb_historico SET str_hist = 'Último ID CEP: "+str(cep[0])+", Último ID Empresa "+str(empresa[0])+".'"
+        mycursor.execute(sql)
+        mydb.commit()
         print(registros, "registros inseridos do CEP "+str(cep[1])+" na empresa "+str(empresa[1])+".")
         driver.close()
         time.sleep(5)
