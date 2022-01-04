@@ -119,7 +119,7 @@ def montaLista(d,emp):
 
 mycursor = mydb.cursor()
 
-sql = "SELECT * FROM tb_cep WHERE id_cidade = 2"
+sql = "SELECT * FROM tb_cep WHERE id_cidade = 2 and id_cep > 4285"
 mycursor.execute(sql)
 
 myresultCEPS = mycursor.fetchall()
@@ -185,7 +185,7 @@ for empresa in EMPRESAS:
                     time.sleep(3)
                 except:
                     pass
-        if str(empresa[0]) == "3":
+        elif str(empresa[0]) == "3":
             buscaCep = itemBusca(driver, By.CLASS_NAME, empresa[3])
             buscaCep.send_keys(str(cep[1]))
             if empresa[8] is None:
@@ -224,5 +224,5 @@ for empresa in EMPRESAS:
         mycursor.execute(sql)
         mydb.commit()
         print(registros, "registros inseridos do CEP "+str(cep[1])+" na empresa "+str(empresa[1])+".")
-        driver.close()
+        driver.quit()
         time.sleep(5)
