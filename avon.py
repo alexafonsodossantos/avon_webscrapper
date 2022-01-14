@@ -119,7 +119,7 @@ def montaLista(d,emp):
 
 mycursor = mydb.cursor()
 
-sql = "SELECT * FROM tb_cep WHERE id_cidade = 2 and id_cep > 9050"
+sql = "SELECT * FROM tb_cep WHERE id_cidade = 2 AND id_cep > 1063 "
 mycursor.execute(sql)
 
 myresultCEPS = mycursor.fetchall()
@@ -127,7 +127,7 @@ myresultCEPS = mycursor.fetchall()
 for x in myresultCEPS:
   CEPS.append(x)
 
-sql = "SELECT * FROM tb_empresa WHERE b_ativo = 1"
+sql = "SELECT * FROM tb_empresa WHERE id_empresa = 2 AND b_ativo = 1"
 mycursor.execute(sql)
 
 myresultEmpresas = mycursor.fetchall()
