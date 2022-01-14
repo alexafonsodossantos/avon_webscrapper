@@ -4,6 +4,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
 from bs4 import BeautifulSoup
 
@@ -212,8 +214,10 @@ for empresa in EMPRESAS:
             buscaCep.send_keys(str(cep[1]))
             driver.execute_script("arguments[0].click();", buscaCep)
             time.sleep(2)
-            buscaCep = itemBusca(driver, By.CLASS_NAME, 'pac-item')
-            ActionChains(driver).move_to_element(buscaCep).click(buscaCep).perform()
+            buscaCep = itemBusca(driver, By.CLASS_NAME, 'pac-item-query')
+            buscaCep.click()
+            #ActionChains(driver).move_to_element(buscaCep).click(buscaCep).perform()
+            #WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//input[@class='button' and @id='PersonalDetailsButton'][@data-controltovalidate='PersonalDetails']"))).click()
             time.sleep(3)
             if empresa[8] is None:
                 buscaCep.send_keys(Keys.RETURN)
