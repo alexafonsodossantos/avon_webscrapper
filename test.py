@@ -210,29 +210,27 @@ for empresa in EMPRESAS:
                     pass
             lista_cadastro = montaLista(driver,empresa)
         elif str(empresa[0]) == "4":
-            buscaCep = itemBusca(driver, By.CLASS_NAME, empresa[3])
-            buscaCep.send_keys(str(cep[1]))
-            driver.execute_script("arguments[0].click();", buscaCep)
-            time.sleep(2)
-            buscaCep = itemBusca(driver, By.CLASS_NAME, 'pac-item-query')
-            buscaCep.click()
-            #ActionChains(driver).move_to_element(buscaCep).click(buscaCep).perform()
-            #WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//input[@class='button' and @id='PersonalDetailsButton'][@data-controltovalidate='PersonalDetails']"))).click()
-            time.sleep(3)
-            if empresa[8] is None:
-                buscaCep.send_keys(Keys.RETURN)
-            else:
-                buscaBotao = itemBusca(driver, By.ID, empresa[8])
-                buscaBotao.click()
-            time.sleep(10)
-            for i in range(9): #definir quantidade de vezes a ser clicado no botao de buscar começar pelo 0
-                try:
-                    buscaMais = itemBusca(driver, By.CLASS_NAME, empresa[7])
-                    buscaMais.click()
-                    time.sleep(10)
-                except:
-                    pass
-            lista_cadastro = montaLista(driver,empresa)
+                ActionChains(driver).move_to_element(itemBusca(driver, By.ID, 'onetrust-accept-btn-handler')).click().perform()
+            #try:
+                buscaCep = itemBusca(driver, By.CLASS_NAME, empresa[3])
+                buscaCep.send_keys(str(cep[1]))
+                driver.execute_script("arguments[0].click();", buscaCep)
+                time.sleep(2)
+                WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CLASS_NAME,'pac-item-query')))
+                ActionChains(driver).move_to_element(itemBusca(driver, By.CLASS_NAME, 'pac-item-query')).click(itemBusca(driver, By.CLASS_NAME, 'pac-item-query')).perform()
+                time.sleep(2)
+                ActionChains(driver).move_to_element(itemBusca(driver, By.CLASS_NAME, 'button-sort__image')).click(itemBusca(driver, By.CLASS_NAME, 'button-sort__image')).perform()
+                time.sleep(5)
+                for i in range(9): #definir quantidade de vezes a ser clicado no botao de buscar começar pelo 0
+                    try:
+                        buscaMais = itemBusca(driver, By.CLASS_NAME, empresa[7])
+                        buscaMais.click()
+                        time.sleep(10)
+                    except:
+                        pass
+                lista_cadastro = montaLista(driver,empresa)
+            #except:
+            #    pass
         else:
             print("Não há empresas selecionadas")
 
