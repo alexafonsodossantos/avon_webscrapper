@@ -53,20 +53,29 @@ def itemBuscaXPath(d,xPath):
 def montaLista(d,emp):
     sairLaco = False
     html_source_code = d.page_source
-    soup = BeautifulSoup(html_source_code, 'html.parser')
+    page = BeautifulSoup(html_source_code, 'html.parser')
+    
+   
 
     if emp[0]==1:
-        artist_name_list = soup.find(class_=emp[4]) #resultado da busca
+        artist_name_list = page.find(class_=emp[4]) #resultado da busca
     elif emp[0]==2:
-        artist_name_list = soup.find(id=emp[4]) #resultado da busca
+        artist_name_list = page.find(id=emp[4]) #resultado da busca
+    elif emp[0]==4:
+        artist_name_list = page.find(class_=emp[4]) #resultado da busca
 
+    print(artist_name_list)
+    exit()
     artist_name_list_items = artist_name_list.find_all(emp[5]) #elemento de separação dos itens
+
     dados = []
 
     for artist_name in artist_name_list_items:
         names = artist_name.contents
         dados.append(names)
     revendedores = []
+
+    print(names) #verificação 1
 
     for a in dados:
         for b in a:
@@ -126,7 +135,7 @@ def montaLista(d,emp):
 
 mycursor = mydb.cursor()
 
-sql = "SELECT * FROM tb_cep WHERE id_cep = 2615"
+sql = "SELECT * FROM tb_cep WHERE id_cep = 4209"
 mycursor.execute(sql)
 
 myresultCEPS = mycursor.fetchall()
@@ -221,13 +230,6 @@ for empresa in EMPRESAS:
                 time.sleep(2)
                 ActionChains(driver).move_to_element(itemBusca(driver, By.CLASS_NAME, 'button-sort__image')).click(itemBusca(driver, By.CLASS_NAME, 'button-sort__image')).perform()
                 time.sleep(5)
-                for i in range(9): #definir quantidade de vezes a ser clicado no botao de buscar começar pelo 0
-                    try:
-                        buscaMais = itemBusca(driver, By.CLASS_NAME, empresa[7])
-                        buscaMais.click()
-                        time.sleep(10)
-                    except:
-                        pass
                 lista_cadastro = montaLista(driver,empresa)
             #except:
             #    pass
