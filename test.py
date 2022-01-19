@@ -8,6 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 from bs4 import BeautifulSoup
+import re
 
 #verifique o driver do chrome antes de executar
 PATH = "./driver/cd96.exe"
@@ -46,10 +47,6 @@ def itemBusca(d,tipoBusca,campo):
     ret = d.find_element(tipoBusca, campo) #local onde está o campo de procura
     return ret
 
-def itemBuscaXPath(d,xPath):
-    ret = d.find_element_by_xpath(xPath) #local onde está o campo de procura
-    return ret
-
 def montaLista(d,emp):
     sairLaco = False
     html_source_code = d.page_source
@@ -64,9 +61,11 @@ def montaLista(d,emp):
     elif emp[0]==4:
         artist_name_list = page.find(class_=emp[4]) #resultado da busca
 
-    print(artist_name_list)
-    exit()
-    artist_name_list_items = artist_name_list.find_all(emp[5]) #elemento de separação dos itens
+    if emp[0]==4:
+        artist_name_list_items = artist_name_list.find_all(emp[5]) #elemento de separação dos itens
+        #montar def para inserir bairro/dist/email/tel/separador
+    else:
+        artist_name_list_items = artist_name_list.find_all(emp[5]) #elemento de separação dos itens
 
     dados = []
 
@@ -74,8 +73,6 @@ def montaLista(d,emp):
         names = artist_name.contents
         dados.append(names)
     revendedores = []
-
-    print(names) #verificação 1
 
     for a in dados:
         for b in a:
@@ -143,7 +140,7 @@ myresultCEPS = mycursor.fetchall()
 for x in myresultCEPS:
   CEPS.append(x)
 
-sql = "SELECT * FROM tb_empresa WHERE id_empresa = 4"
+sql = "SELECT * FROM tb_empresa WHERE id_empresa = 1"
 mycursor.execute(sql)
 
 myresultEmpresas = mycursor.fetchall()
