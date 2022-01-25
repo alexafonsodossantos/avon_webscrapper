@@ -119,7 +119,7 @@ def montaLista(d,emp):
 
 mycursor = mydb.cursor()
 
-sql = "SELECT * FROM tb_cep WHERE id_cidade = 2 AND id_cep > 9345 "
+sql = "SELECT * FROM tb_cep WHERE id_cidade = 2 AND id_cep > 9460 "
 mycursor.execute(sql)
 
 myresultCEPS = mycursor.fetchall()
@@ -209,14 +209,14 @@ for empresa in EMPRESAS:
         registros = 0
         for nhe in lista_cadastro:
             mycursor = mydb.cursor()
-            sql = "SELECT str_nome_revendedores FROM tb_revendedores WHERE str_nome_revendedores = '"+str(limpaCampo(nhe[0]))+"'"
-            print (sql)
+            consulta = limpaCampo(nhe[0])
+            sql = "SELECT str_nome_revendedores FROM tb_revendedores WHERE str_nome_revendedores = '"+consulta+"'"
             mycursor.execute(sql)
             # gets the number of rows affected by the command executed
             msg = mycursor.fetchone()  
             # check if it is empty and print error
             if not msg:
-                sql = "INSERT INTO tb_revendedores (str_nome_revendedores, str_bairro, str_distancia, str_email, str_telefone, id_empresa, id_cidade) VALUES ( '"+limpaCampo(nhe[0])+"', '"+nhe[1]+"', '"+nhe[2]+"', '"+nhe[3]+"', '"+nhe[4]+"', '"+str(empresa[0])+"', '"+str(cep[2])+"')"
+                sql = "INSERT INTO tb_revendedores (str_nome_revendedores, str_bairro, str_distancia, str_email, str_telefone, id_empresa, id_cidade) VALUES ( '"+consulta+"', '"+nhe[1]+"', '"+nhe[2]+"', '"+nhe[3]+"', '"+nhe[4]+"', '"+str(empresa[0])+"', '"+str(cep[2])+"')"
                 mycursor.execute(sql)
                 mydb.commit()
                 registros += 1 
