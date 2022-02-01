@@ -119,7 +119,7 @@ def montaLista(d,emp):
 
 mycursor = mydb.cursor()
 
-sql = "SELECT * FROM tb_cep WHERE id_cidade = 2 AND id_cep > 9460 "
+sql = "SELECT * FROM tb_cep WHERE id_cidade = 2 AND id_cep > 14244 "
 mycursor.execute(sql)
 
 myresultCEPS = mycursor.fetchall()
@@ -216,7 +216,7 @@ for empresa in EMPRESAS:
             msg = mycursor.fetchone()  
             # check if it is empty and print error
             if not msg:
-                sql = "INSERT INTO tb_revendedores (str_nome_revendedores, str_bairro, str_distancia, str_email, str_telefone, id_empresa, id_cidade) VALUES ( '"+consulta+"', '"+nhe[1]+"', '"+nhe[2]+"', '"+nhe[3]+"', '"+nhe[4]+"', '"+str(empresa[0])+"', '"+str(cep[2])+"')"
+                sql = "INSERT INTO tb_revendedores (str_nome_revendedores, str_bairro, str_distancia, str_email, str_telefone, id_empresa, id_cidade, id_CEP) VALUES ( '"+consulta+"', '"+nhe[1]+"', '"+nhe[2]+"', '"+nhe[3]+"', '"+nhe[4]+"', '"+str(empresa[0])+"', '"+str(cep[2])+"', '"+str(cep[0])+"')"
                 mycursor.execute(sql)
                 mydb.commit()
                 registros += 1 
